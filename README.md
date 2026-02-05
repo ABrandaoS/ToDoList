@@ -65,7 +65,7 @@ A API estará disponível em: http://localhost:8080
   "title": "Estudar Spring Boot",
   "description": "Finalizar o módulo de DTOs e Mappers",
   "dueDate": "2026-12-31T10:00:00",
-  "priority:" "LOW"
+  "priority": "LOW"
 }
 ```
 
