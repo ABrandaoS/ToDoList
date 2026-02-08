@@ -1,7 +1,9 @@
 package com.alexandre.todolist.dto;
 
+import com.alexandre.todolist.domain.enums.Priority;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
@@ -11,10 +13,18 @@ public class TaskRequestDTO {
     @Size(max = 100, message = "O título deve ter no máximo 100 caracteres")
     private String title;
 
+    @NotNull(message = "A descrição não pode ser nula")
+    @Size(max = 255, message = "A descrição deve ter no máximo 255 caracteres")
     private String description;
 
+    @NotNull(message = "A data de vencimento não pode ser nula")
     @FutureOrPresent(message = "A data de vencimento não pode estar no passado")
     private LocalDateTime dueDate;
+
+    @NotNull(message = "A prioridade não pode ser nula")
+    private Priority priority;
+
+
 
     public TaskRequestDTO(){};
 
@@ -40,5 +50,13 @@ public class TaskRequestDTO {
 
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

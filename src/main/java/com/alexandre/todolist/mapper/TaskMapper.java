@@ -13,6 +13,7 @@ public class TaskMapper {
         task.setTitle(dto.getTitle());
         task.setDescription(dto.getDescription());
         task.setDueDate(dto.getDueDate());
+        task.setPriority(dto.getPriority());
         return task;
     };
 
@@ -25,15 +26,13 @@ public class TaskMapper {
         response.setCompleted(task.isCompleted());
         response.setDueDate(task.getDueDate());
         response.setCreatedAt(task.getCreatedAt());
+        response.setPriority(task.getPriority());
         return response;
     }
 
     // Método para aplicar as atualizações do UpdateDTO na Entity existente
     public static void updateEntityFromDto(TaskUpdateRequestDTO dto, Task task){
         if (dto.getTitle() != null){
-            if (dto.getTitle().isBlank()){
-                throw new IllegalArgumentException("O título não pode estar em branco");
-            }
             task.setTitle(dto.getTitle());
         }
         if (dto.getDescription() != null){
@@ -44,6 +43,9 @@ public class TaskMapper {
         }
         if (dto.getCompleted() != null) {
             task.setCompleted(dto.getCompleted());
+        }
+        if (dto.getPriority() != null){
+            task.setPriority(dto.getPriority());
         }
     };
 }

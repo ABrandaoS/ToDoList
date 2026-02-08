@@ -1,5 +1,6 @@
 package com.alexandre.todolist.entity;
 
+import com.alexandre.todolist.domain.enums.Priority;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,18 @@ public class Task {
     private LocalDateTime dueDate;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Priority priority;
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
 
     public Long getId() {
         return id;

@@ -1,5 +1,7 @@
 package com.alexandre.todolist.dto;
 
+import com.alexandre.todolist.domain.enums.Priority;
+
 import java.time.LocalDateTime;
 
 public class TaskResponseDTO {
@@ -9,16 +11,26 @@ public class TaskResponseDTO {
     private boolean completed;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;
+    private Priority priority;
 
     public TaskResponseDTO(){};
 
-    public TaskResponseDTO(Long id, String title, String description, boolean completed, LocalDateTime dueDate, LocalDateTime createdAt){
+    public TaskResponseDTO(Long id, String title, String description, boolean completed, LocalDateTime dueDate, LocalDateTime createdAt, Priority priority){
         this.id = id;
         this.title = title;
         this.description = description;
         this.completed = completed;
         this.dueDate = dueDate;
         this.createdAt = createdAt;
+        this.priority = priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     public Long getId() {
