@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public class TaskRequestDTO {
     @NotBlank(message = "O título é obrigatório")
-    @Size(max = 100, message = "O título deve ter no máximo 100 caracteres")
+    @Size(min = 5, max = 100, message = "O título não pode ser vazio e deve ter no mínimo 5 e máximo 100 caracteres")
     private String title;
 
     @NotNull(message = "A descrição não pode ser nula")
@@ -18,7 +18,7 @@ public class TaskRequestDTO {
     private String description;
 
     @NotNull(message = "A data de vencimento não pode ser nula")
-    @FutureOrPresent(message = "A data de vencimento não pode estar no passado")
+    @FutureOrPresent(message = "A data de vencimento deve ser futura")
     private LocalDateTime dueDate;
 
     @NotNull(message = "A prioridade não pode ser nula")

@@ -4,6 +4,9 @@ import com.alexandre.todolist.dto.TaskRequestDTO;
 import com.alexandre.todolist.dto.TaskResponseDTO;
 import com.alexandre.todolist.dto.TaskUpdateRequestDTO;
 import com.alexandre.todolist.entity.Task;
+import com.alexandre.todolist.exception.InvalidTitleException;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 
 public class TaskMapper {
 
@@ -30,11 +33,20 @@ public class TaskMapper {
         return response;
     }
 
-    // Método para aplicar as atualizações do UpdateDTO na Entity existente
+    // Para aplicar as atualizações do UpdateDTO na Entity existente
     public static void updateEntityFromDto(TaskUpdateRequestDTO dto, Task task){
         if (dto.getTitle() != null){
-            task.setTitle(dto.getTitle());
+
+            // .trim() remove os espaços das bordas.
+            // .lenght(0 checa o tamanho real do texto limpo
+            String trimmedTitle = dto.getTitle().trim();
+
+            if (trimmedTitle.isEmpty() || trimmedTitle.length() < 5 || trimmedTitle.length() > 100){
+                throw new InvalidTitleException("O título deve conter entre 5 e 100 caracteres válidos (não apenas espaços).");
+            }
+            task.setTitle(trimmedTitle);
         }
+
         if (dto.getDescription() != null){
             task.setDescription(dto.getDescription());
         }

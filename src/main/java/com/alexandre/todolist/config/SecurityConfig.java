@@ -16,7 +16,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Desabilita proteção contra CSRF (necessário para POST)
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll() // Libera TODOS os endpoints
-                );
+                )
+                .headers(headers-> headers.frameOptions(frame-> frame.disable()));
         return http.build();
     }
 }
