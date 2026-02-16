@@ -8,6 +8,9 @@ import com.alexandre.todolist.exception.InvalidTitleException;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 public class TaskMapper {
 
     // Converte o DTO de criação para a Entity
@@ -15,7 +18,7 @@ public class TaskMapper {
         Task task = new Task();
         task.setTitle(dto.getTitle());
         task.setDescription(dto.getDescription());
-        task.setDueDate(dto.getDueDate());
+        task.setDueDate(dto.getDueDate().atOffset(ZoneOffset.UTC));
         task.setPriority(dto.getPriority());
         return task;
     };
@@ -27,8 +30,8 @@ public class TaskMapper {
         response.setTitle(task.getTitle());
         response.setDescription(task.getDescription());
         response.setCompleted(task.isCompleted());
-        response.setDueDate(task.getDueDate());
-        response.setCreatedAt(task.getCreatedAt());
+        response.setDueDate(task.getDueDate().toLocalDateTime());
+        response.setCreatedAt(task.getCreatedAt().toLocalDateTime());
         response.setPriority(task.getPriority());
         return response;
     }
@@ -51,7 +54,7 @@ public class TaskMapper {
             task.setDescription(dto.getDescription());
         }
         if (dto.getDueDate() != null) {
-            task.setDueDate(dto.getDueDate());
+            task.setDueDate(dto.getDueDate().atOffset(ZoneOffset.UTC));
         }
         if (dto.getCompleted() != null) {
             task.setCompleted(dto.getCompleted());

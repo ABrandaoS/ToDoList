@@ -4,6 +4,7 @@ import com.alexandre.todolist.domain.enums.Priority;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -21,9 +22,9 @@ public class Task {
     private boolean completed = false;
 
     @Column(nullable = false)
-    private LocalDateTime dueDate;
+    private OffsetDateTime dueDate;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private OffsetDateTime createdAt = OffsetDateTime.now();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -69,19 +70,19 @@ public class Task {
         this.completed = completed;
     }
 
-    public LocalDateTime getDueDate() {
+    public OffsetDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(OffsetDateTime dueDate) {
         this.dueDate = dueDate;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }
